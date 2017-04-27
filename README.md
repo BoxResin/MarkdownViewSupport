@@ -1,6 +1,7 @@
 # MarkdownViewSupport
 
 [![Download](https://api.bintray.com/packages/boxresin/maven/MarkdownViewSupport/images/download.svg) ](https://bintray.com/boxresin/maven/MarkdownViewSupport/_latestVersion)
+![license](https://img.shields.io/badge/license-Apache%202-green.svg)
 
 ![MarkdownView screenshot](https://cloud.githubusercontent.com/assets/13031505/25468471/09454dd6-2b51-11e7-91ad-dd3e02f27359.gif)
 
