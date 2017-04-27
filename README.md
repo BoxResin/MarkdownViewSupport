@@ -12,7 +12,7 @@ This is a lightweight support library for [`MarkdownView`](https://github.com/fa
 
 ## Getting started
 
-To add `MarkdownViewSupport` to your project, add the following to `build.gradle` file:
+To add `MarkdownViewSupport` library to your project, add the following to `build.gradle` file:
 ```gradle
 dependencies { 
     compile 'us.feras.mdv:markdownview:1.1.0'
@@ -21,7 +21,7 @@ dependencies {
 
 ## Usage
 
-Add `MarkdownViewSupport` to your layout: 
+Add `<MarkdownView/>` to your layout: 
 
 ```xml
 <us.feras.mdv.MarkdownView
@@ -33,20 +33,20 @@ Add `MarkdownViewSupport` to your layout:
     android:id="@+id/markdownView" />
 ```
 
-and reference it in your Activity/Fragment:  
+and refer it in your Activity/Fragment:
 
 ```java
 MarkdownView markdownView = (MarkdownView) findViewById(R.id.markdownView);
-markdownView.loadMarkdown("## Hello Markdown");
-markdownView.loadCssFromAssets("markdown_css_themes/paperwhite.css");
 ```
 **NOTE**:
 You could also create the view by code. Below an example of how to set the whole activity to be a MarkdownView by Adding the following to your onCreate method:
 
 ```java
-  MarkdownView markdownView = new MarkdownView(this);
-  setContentView(markdownView);
-  markdownView.loadMarkdown("## Hello Markdown"); 
+MarkdownView markdownView = new MarkdownView(this);
+setContentView(markdownView);
+
+markdownView.loadMarkdown("## Hello Markdown");
+markdownView.loadCssFromAssets("markdown_css_themes/paperwhite.css");
 ```
 
 ## License
