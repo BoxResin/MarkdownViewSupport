@@ -1,4 +1,5 @@
 [![Download](https://api.bintray.com/packages/falnatsheh/maven/MarkdownView/images/download.svg)](https://bintray.com/falnatsheh/maven/MarkdownView/_latestVersion)
+
 ![MarkdownView screenshot](https://cloud.githubusercontent.com/assets/13031505/25467459/477e1e28-2b49-11e7-94d7-291346027a22.gif)
 
 ## About
