@@ -9,7 +9,7 @@
 
 This is a lightweight support library for [`MarkdownView`](https://github.com/falnatsheh/MarkdownView). `MarkdownView` is a Markdown renderer for Android. It has backward compatibility with API 7 and higher. For more information, see the [original project](https://github.com/falnatsheh/MarkdownView).
 
-**NOTE**: Some unimportant features of `MarkdownView` are removed in order to make the library lighter.
+**NOTE**: Some unimportant features of `MarkdownView` have been removed in order to make the library lighter.
 
 ## Getting started
 
