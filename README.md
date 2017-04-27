@@ -12,31 +12,35 @@ This is a lightweight support library for [`MarkdownView`](https://github.com/fa
 
 ## Getting started
 
-- To add MarkdownView to your project, add the following to `build.gradle` file:
-```javascript
-	dependencies { 
-	    compile 'us.feras.mdv:markdownview:1.1.0'
-	}
+To add `MarkdownViewSupport` to your project, add the following to `build.gradle` file:
+```gradle
+dependencies { 
+    compile 'us.feras.mdv:markdownview:1.1.0'
+}
 ```
 
 ## Usage
 
-Add MarkdownView to your layout: 
+Add `MarkdownViewSupport` to your layout: 
 
 ```xml
-    <us.feras.mdv.MarkdownView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/markdownView" />
+<us.feras.mdv.MarkdownView
+    xmlns:mdv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    mdv:cssFromAssets="markdown_css_themes/paperwhite.css"
+    mdv:markdown="## Hello Markdown"
+    android:id="@+id/markdownView" />
 ```
 
 and reference it in your Activity/Fragment:  
 
 ```java
 MarkdownView markdownView = (MarkdownView) findViewById(R.id.markdownView);
-markdownView.loadMarkdown("## Hello Markdown"); 
+markdownView.loadMarkdown("## Hello Markdown");
+markdownView.loadCssFromAssets("markdown_css_themes/paperwhite.css");
 ```
-**Note**:
+**NOTE**:
 You could also create the view by code. Below an example of how to set the whole activity to be a MarkdownView by Adding the following to your onCreate method:
 
 ```java
@@ -45,56 +49,6 @@ You could also create the view by code. Below an example of how to set the whole
   markdownView.loadMarkdown("## Hello Markdown"); 
 ```
 
-## Demo App and Code Sample
-
-The above screenshots taking from the demo app which could be found here. The demo app include code to demonstrate: 
-
-- Loading Local Markdown File. 
-- Loading Remote Markdown File. 
-- Loading Markdown text.
-- Live Preview sample code (similar to [Marked Mac app](http://marked2app.com/))
-- Themes
-
-## Loading Markdown text or file: 
-
-- `loadMarkdown(String text)`:
-Using this method will result in loading md string to the MarkdownView and displaying it as HTML. 
-
- 
-- `loadMarkdownFile(String url)`:
-You can use this method to load local or online files. 
-
-To load a local file, you have to add it to your assets folder and pass a url that start with "file:///android_asset/" : 
-
-```java
-markdownView.loadMarkdownFile("file:///android_asset/myFile.md");
-```
-
-To load a remote file you need to pass the full url :    
-
-```java
-markdownView.loadMarkdownFile("http://www.my-site.com/myFile.md");
-```
-
-## Theming
-
-You could apply custom CSS to the MarkdownView. Example: 
-
-```java
-markdownView.loadMarkdownFile("file:///android_asset/hello.md","file:///android_asset/MyCustomTheme.css");
-```
-You could take a look at CSS example [here](https://github.com/falnatsheh/MarkdownView/tree/master/MarkdownViewDemo/assets/markdown_css_themes), you could also view them in the sample app.
-
-## ChangeLog: 
-
-- **MarkdownView 1.1.0**:
-	- Support Loading Markdown file from assets subfolders (Thanks [@echodjb](https://github.com/DiegoRosado)). 
-- **MarkdownView 1.0.0**:
-	- Convert to Gradle Project (Avillable now on [jCenter](https://bintray.com/falnatsheh/maven/MarkdownView/view)). 
-	- Fix CSS Issue (Thanks [@swanson](https://github.com/swanson) & [@echodjb](https://github.com/echodjb)). 
-	- Update demo app.  
-
-						
 ## License
 ```
 Copyright for portions of project MarkdownViewSupport are held by Feras Alnatsheh, 2011 as part of project MarkdownView. All other copyright for project MarkdownViewSupport are held by Minsuk Eom, 2017.
