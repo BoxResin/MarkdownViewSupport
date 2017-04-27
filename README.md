@@ -59,7 +59,8 @@ You could take a look at CSS example [here](https://github.com/BoxResin/Markdown
 
 ## License
 ```
-Copyright for portions of project MarkdownViewSupport are held by Feras Alnatsheh, 2011 as part of project MarkdownView. All other copyright for project MarkdownViewSupport are held by Minsuk Eom, 2017.
+Copyright 2017 Minsuk Eom
+Copyright 2011 Feras Alnatsheh
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
