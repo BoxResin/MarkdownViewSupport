@@ -15,7 +15,7 @@ This is a lightweight support library for [`MarkdownView`](https://github.com/fa
 To add `MarkdownViewSupport` library to your project, add the following to `build.gradle` file:
 ```gradle
 dependencies { 
-    compile 'us.feras.mdv:markdownview:1.1.0'
+    compile 'boxresin.library:MarkdownViewSupport:1.0.0'
 }
 ```
 
