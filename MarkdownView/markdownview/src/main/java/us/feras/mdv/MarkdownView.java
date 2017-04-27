@@ -1,6 +1,7 @@
 package us.feras.mdv;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -26,6 +27,24 @@ public class MarkdownView extends WebView {
 	public MarkdownView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		markdownProcessor = new MarkdownProcessor();
+
+		TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.MarkDownView);
+
+		String markdownText = typedArray.getString(R.styleable.MarkDownView_markdown);
+		String markdownPath = typedArray.getString(R.styleable.MarkDownView_markdownFromAssets);
+		String cssText = typedArray.getString(R.styleable.MarkDownView_css);
+		String cssPath = typedArray.getString(R.styleable.MarkDownView_cssFromAssets);
+
+		if (markdownText != null)
+			loadMarkdown(markdownText);
+		else if (markdownPath != null)
+			loadMarkdownFromAssets(markdownPath);
+		if (cssText != null)
+			loadCss(cssText);
+		else if (cssPath != null)
+			loadCssFromAssets(cssPath);
+
+		typedArray.recycle();
 	}
 
 	public MarkdownView(Context context) {
