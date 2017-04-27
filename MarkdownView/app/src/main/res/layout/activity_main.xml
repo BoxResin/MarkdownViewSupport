@@ -40,21 +40,10 @@
             android:width="200dp" />
 
         <Button
-            android:id="@+id/online_md_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/local_text_button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:onClick="displayOnlineMdActivity"
-            android:text="Remote MarkDown File"
-            android:width="200dp" />
-
-        <Button
             android:id="@+id/local_md_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/online_md_button"
+            android:layout_below="@id/local_text_button"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:onClick="displayLocalMdFileActivity"

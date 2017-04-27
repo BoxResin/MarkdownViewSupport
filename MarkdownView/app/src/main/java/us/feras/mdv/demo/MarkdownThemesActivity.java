@@ -1,7 +1,5 @@
 package us.feras.mdv.demo;
 
-import us.feras.mdv.MarkdownView;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import us.feras.mdv.MarkdownView;
 
 public class MarkdownThemesActivity extends AppCompatActivity implements
 		OnItemSelectedListener {
@@ -29,8 +29,8 @@ public class MarkdownThemesActivity extends AppCompatActivity implements
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {
 		MarkdownView mdv = (MarkdownView) findViewById(R.id.markdownView);
-		mdv.loadMarkdownFile("file:///android_asset/hello.md",
-				"file:///android_asset/markdown_css_themes/"
+		mdv.loadMarkdownFromAssets("hello.md");
+		mdv.loadCssFromAssets("markdown_css_themes/"
 						+ parent.getItemAtPosition(pos).toString() + ".css");
 	}
 

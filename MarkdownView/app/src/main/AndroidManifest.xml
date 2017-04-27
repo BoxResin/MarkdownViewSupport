@@ -19,8 +19,6 @@
         </activity>
         <activity android:name=".LocalMarkdownActivity" >
         </activity>
-        <activity android:name=".RemoteMarkdownActivity" >
-        </activity>
         <activity android:name=".MarkdownThemesActivity" >
         </activity>
         <activity

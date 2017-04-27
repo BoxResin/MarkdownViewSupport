@@ -21,10 +21,6 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(new Intent(this, MarkdownThemesActivity.class));
     }
 
-    public void displayOnlineMdActivity(View view) {
-        this.startActivity(new Intent(this, RemoteMarkdownActivity.class));
-    }
-
     public void displayLocalMdFileActivity(View view) {
         this.startActivity(new Intent(this, LocalMarkdownActivity.class));
     }
