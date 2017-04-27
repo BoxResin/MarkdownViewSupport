@@ -1,6 +1,6 @@
-
-![MarkdownView screenshot](http://i.imgur.com/PufzgYX.jpg)
 [![Download](https://api.bintray.com/packages/falnatsheh/maven/MarkdownView/images/download.svg)](https://bintray.com/falnatsheh/maven/MarkdownView/_latestVersion)
+
+![MarkdownView screenshot](https://cloud.githubusercontent.com/assets/13031505/25467459/477e1e28-2b49-11e7-94d7-291346027a22.gif)
 
 ## About
 
@@ -42,11 +42,6 @@ You could also create the view by code. Below an example of how to set the whole
   setContentView(markdownView);
   markdownView.loadMarkdown("## Hello Markdown"); 
 ```
-
-## Screenshots
-
-<img src="http://i.imgur.com/gY8eXaj.jpg" width="300"> 
-<img src="http://i.imgur.com/ETHYbCv.jpg" width="300"> 
 
 ## Demo App and Code Sample
 
