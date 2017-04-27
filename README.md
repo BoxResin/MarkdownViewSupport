@@ -32,6 +32,7 @@ Add `<MarkdownView/>` to your layout:
     mdv:markdown="## Hello Markdown"
     android:id="@+id/markdownView" />
 ```
+`cssFromAssets` attribute is optional. If you want to apply custom style to markdown, you should make css file at `assets` directory, and attach its path to `cssFromAssets` attribute. You can also use `markdownFromAssets` attribute to set markdown text from the `assets` as well.
 
 and refer it in your Activity/Fragment:
 
