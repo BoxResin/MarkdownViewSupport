@@ -1,9 +1,15 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
-ext {
-    PUBLISH_GROUP_ID = 'us.feras.mdv'
-    PUBLISH_ARTIFACT_ID = 'markdownview'
-    PUBLISH_VERSION = '1.1.0'
+publish {
+    userOrg = 'boxresin'
+    groupId = 'boxresin.library'
+    artifactId = 'MarkdownViewSupport'
+    publishVersion = '1.0.0'
+    desc = 'Markdown renderer for Android'
+    website = 'https://github.com/BoxResin/MarkdownViewSupport'
+    issueTracker = "https://github.com/BoxResin/MarkdownViewSupport/issues"
+    repository = "https://github.com/BoxResin/MarkdownViewSupport.git"
 }
 
 android {
@@ -30,5 +36,3 @@ dependencies {
     compile 'org.markdownj:markdownj-core:0.4'
     compile 'com.android.support:support-annotations:25.3.1'
 }
-
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
