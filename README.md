@@ -4,7 +4,7 @@
 
 ## About
 
-This is a lightweight support library for [`MarkdownView`](https://github.com/falnatsheh/MarkdownView). It has backward compatibility with API 7 and higher.
+This is a lightweight support library for [`MarkdownView`](https://github.com/falnatsheh/MarkdownView). It has backward compatibility with API 7 and higher. For more information, see [original project](https://github.com/falnatsheh/MarkdownView).
 
 ## Getting started
 
