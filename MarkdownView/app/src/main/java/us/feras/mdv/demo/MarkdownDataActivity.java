@@ -1,15 +1,13 @@
 package us.feras.mdv.demo;
 
-import us.feras.mdv.MarkdownView;
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import us.feras.mdv.MarkdownView;
 
 public class MarkdownDataActivity extends AppCompatActivity {
 

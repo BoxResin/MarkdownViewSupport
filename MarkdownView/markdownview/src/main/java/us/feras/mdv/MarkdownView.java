@@ -2,10 +2,11 @@ package us.feras.mdv;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.webkit.WebView;
+
+import androidx.annotation.StringRes;
 
 import org.markdownj.MarkdownProcessor;
 
