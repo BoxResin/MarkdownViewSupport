@@ -1,16 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.minyushov.bintray'
 
-publish {
-    userOrg = 'boxresin'
+bintray {
+    user = 'boxresin'
+    key = findProperty('key') ?: 'none'
+
     groupId = 'boxresin.library'
     artifactId = 'MarkdownViewSupport'
-    publishVersion = '1.0.0'
-    desc = 'Markdown renderer for Android'
-    website = 'https://github.com/BoxResin/MarkdownViewSupport'
-    issueTracker = "https://github.com/BoxResin/MarkdownViewSupport/issues"
-    repository = "https://github.com/BoxResin/MarkdownViewSupport.git"
+    version = '1.0.0'
+    repo = 'maven'
+    vcsUrl = "https://github.com/BoxResin/MarkdownViewSupport.git"
+    dryRun = false
+    docs = true
+    sources = true
 }
 
 android {
