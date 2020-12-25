@@ -29,12 +29,12 @@ public class MarkdownView extends WebView {
 		super(context, attrs);
 		markdownProcessor = new MarkdownProcessor();
 
-		TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.MarkDownView);
+		TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.MarkdownView);
 
-		String markdownText = typedArray.getString(R.styleable.MarkDownView_markdown);
-		String markdownPath = typedArray.getString(R.styleable.MarkDownView_markdownFromAssets);
-		String cssText = typedArray.getString(R.styleable.MarkDownView_css);
-		String cssPath = typedArray.getString(R.styleable.MarkDownView_cssFromAssets);
+		String markdownText = typedArray.getString(R.styleable.MarkdownView_markdown);
+		String markdownPath = typedArray.getString(R.styleable.MarkdownView_markdownFromAssets);
+		String cssText = typedArray.getString(R.styleable.MarkdownView_css);
+		String cssPath = typedArray.getString(R.styleable.MarkdownView_cssFromAssets);
 
 		if (markdownText != null)
 			loadMarkdown(markdownText);

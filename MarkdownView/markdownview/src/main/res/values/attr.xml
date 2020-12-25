@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<declare-styleable name = "MarkDownView">
+	<declare-styleable name = "MarkdownView">
 		<attr name = "markdown" format = "string"/>
 		<attr name = "markdownFromAssets" format = "string"/>
 		<attr name = "css" format = "string"/>
