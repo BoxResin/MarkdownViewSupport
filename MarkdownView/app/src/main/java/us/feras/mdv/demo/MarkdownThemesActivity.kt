@@ -1,42 +1,36 @@
-package us.feras.mdv.demo;
+package us.feras.mdv.demo
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
+import us.feras.mdv.MarkdownView
 
-import androidx.appcompat.app.AppCompatActivity;
+class MarkdownThemesActivity : AppCompatActivity(), OnItemSelectedListener {
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.markdown_themes)
 
-import us.feras.mdv.MarkdownView;
+        val themesSpinner = findViewById<Spinner>(R.id.themes_spinner)
+        val adapter = ArrayAdapter.createFromResource(
+            this, R.array.md_themes, android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        themesSpinner.adapter = adapter
+        themesSpinner.setSelection(0)
+        themesSpinner.onItemSelectedListener = this
+    }
 
-public class MarkdownThemesActivity extends AppCompatActivity implements
-		OnItemSelectedListener {
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.markdown_themes);
-		Spinner themesSpinner = (Spinner) findViewById(R.id.themes_spinner);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.md_themes, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		themesSpinner.setAdapter(adapter);
-		themesSpinner.setSelection(0);
-		themesSpinner.setOnItemSelectedListener(this);
-	}
+    override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+        val mdv: MarkdownView = findViewById(R.id.markdownView)
+        mdv.loadMarkdownFromAssets("hello.md")
+        mdv.loadCssFromAssets("markdown_css_themes/${parent.getItemAtPosition(pos)}.css")
+    }
 
-	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int pos,
-			long id) {
-		MarkdownView mdv = (MarkdownView) findViewById(R.id.markdownView);
-		mdv.loadMarkdownFromAssets("hello.md");
-		mdv.loadCssFromAssets("markdown_css_themes/"
-						+ parent.getItemAtPosition(pos).toString() + ".css");
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> parent) {
-		// no-op
-	}
+    override fun onNothingSelected(parent: AdapterView<*>) {
+        // no-op
+    }
 }
