@@ -43,7 +43,9 @@ class MarkdownDataActivity : AppCompatActivity() {
 
     private fun updateMarkdownView() {
         this.scope.launch {
-            markdownView.loadMarkdown(markdownEditText.text.toString())
+            markdownView.commit {
+                loadMarkdown(markdownEditText.text.toString())
+            }
         }
     }
 }

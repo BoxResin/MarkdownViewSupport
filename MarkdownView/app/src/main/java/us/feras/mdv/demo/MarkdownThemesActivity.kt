@@ -35,10 +35,12 @@ class MarkdownThemesActivity : AppCompatActivity(), OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+        val mdv: MarkdownView = findViewById(R.id.markdownView)
         this.scope.launch {
-            val mdv: MarkdownView = findViewById(R.id.markdownView)
-            mdv.loadMarkdownFromAssets("hello.md")
-            mdv.loadCssFromAssets("markdown_css_themes/${parent.getItemAtPosition(pos)}.css")
+            mdv.commit {
+                loadMarkdownFromAssets("hello.md")
+                loadCssFromAssets("markdown_css_themes/${parent.getItemAtPosition(pos)}.css")
+            }
         }
     }
 

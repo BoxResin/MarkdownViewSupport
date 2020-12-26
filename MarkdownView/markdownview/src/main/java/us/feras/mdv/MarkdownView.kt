@@ -8,6 +8,7 @@ import android.webkit.WebView
 import androidx.annotation.StringRes
 import kotlinx.coroutines.*
 import org.markdownj.MarkdownProcessor
+import java.util.*
 
 /**
  * @author Feras Alnatsheh
@@ -26,75 +27,42 @@ class MarkdownView : WebView {
         typedArray.recycle()
 
         GlobalScope.launch {
-            if (mdText.isNotEmpty()) {
-                loadMarkdown(mdText)
-            } else if (mdPath.isNotEmpty()) {
-                loadMarkdownFromAssets(mdPath)
-            }
+            commit {
+                if (mdText.isNotEmpty()) {
+                    loadMarkdown(mdText)
+                } else if (mdPath.isNotEmpty()) {
+                    loadMarkdownFromAssets(mdPath)
+                }
 
-            if (cssText.isNotEmpty()) {
-                loadCss(cssText)
-            } else if (cssPath.isNotEmpty()) {
-                loadCssFromAssets(cssPath)
+                if (cssText.isNotEmpty()) {
+                    loadCss(cssText)
+                } else if (cssPath.isNotEmpty()) {
+                    loadCssFromAssets(cssPath)
+                }
             }
         }
     }
 
     constructor(context: Context) : super(context)
 
-    /**
-     * Loads the given Markdown text to the view as rich formatted HTML.
-     * @param markdownText input in Markdown format
-     */
-    suspend fun loadMarkdown(markdownText: String) {
-        withContext(Dispatchers.Main) {
-            this@MarkdownView.markdownText = markdownText
-            syncMarkdown()
+    suspend fun commit(block: Config.() -> Unit): Unit = coroutineScope {
+        val config = Config(scope = this)
+        config.block()
+
+        // Apply config
+        if (config.markdownText != null) {
+            this@MarkdownView.markdownText = config.markdownText!!.await()
         }
-    }
 
-    /**
-     * Loads the given Markdown text to the view as rich formatted HTML.
-     * @param markdownTextId Markdown text id from String resource.
-     */
-    suspend fun loadMarkdown(@StringRes markdownTextId: Int) {
-        this.loadMarkdown(this.resources.getString(markdownTextId))
-    }
-
-    /**
-     * Loads the given Markdown text from Android assets.
-     * @param markdownPath Markdown text file in assets directory. (ex. "hello.md")
-     */
-    suspend fun loadMarkdownFromAssets(markdownPath: String) {
-        this.loadMarkdown(this.readFileFromAsset(markdownPath))
-    }
-
-    /**
-     * Loads the given CSS text to the Markdown text.
-     * @param cssText input in CSS format
-     */
-    suspend fun loadCss(cssText: String) {
-        withContext(Dispatchers.Main) {
-            this@MarkdownView.cssText = cssText
-            syncMarkdown()
+        // A CPU intensive task
+        val mdTextInHtml: String = withContext(Dispatchers.Default) {
+            markdownProcessor.markdown(this@MarkdownView.markdownText)
         }
-    }
 
-    /**
-     * Loads the CSS text from Android assets.
-     * @param cssPath CSS file path in assets directory. (ex. "basic_theme.css", "sample/classic.css")
-     */
-    suspend fun loadCssFromAssets(cssPath: String) {
-        this.loadCss(this.readFileFromAsset(cssPath))
-    }
-
-    // A method to refresh markdown text on screen
-    private suspend fun syncMarkdown(): Unit = withContext(Dispatchers.Main) {
-        val md: String = this@MarkdownView.markdownText
-        val cssText: String = this@MarkdownView.cssText
-        val mdToHtml: String = withContext(Dispatchers.Default) {
-            markdownProcessor.markdown(md)
+        if (config.cssText != null) {
+            this@MarkdownView.cssText = config.cssText!!.await()
         }
+
         val html = """
 <!DOCTYPE html>
 <html>
@@ -104,11 +72,63 @@ $cssText
         </style>
     </head>
     <body>
-$mdToHtml
+$mdTextInHtml
     </body>
 </html>"""
 
-        loadData(html, "text/html", "UTF-8")
+        withContext(Dispatchers.Main) {
+            loadData(html, "text/html", "UTF-8")
+        }
+    }
+
+    inner class Config internal constructor(private val scope: CoroutineScope) {
+        internal var markdownText: Deferred<String>? = null
+        internal var cssText: Deferred<String>? = null
+
+        /**
+         * Loads the given Markdown text to the view as rich formatted HTML.
+         * @param markdownText input in Markdown format
+         */
+        fun loadMarkdown(markdownText: String) {
+            this.markdownText?.cancel()
+            this.markdownText = this.scope.async { markdownText }
+        }
+
+        /**
+         * Loads the given Markdown text to the view as rich formatted HTML.
+         * @param markdownTextId Markdown text id from String resource.
+         */
+        fun loadMarkdown(@StringRes markdownTextId: Int) {
+            this.markdownText?.cancel()
+            this.markdownText = this.scope.async { resources.getString(markdownTextId) }
+        }
+
+        /**
+         * Loads the given Markdown text from Android assets.
+         * @param markdownPath Markdown text file in assets directory. (ex. "hello.md")
+         */
+        fun loadMarkdownFromAssets(markdownPath: String) {
+            this.markdownText?.cancel()
+            this.markdownText = this.scope.async { readFileFromAsset(markdownPath) }
+        }
+
+        /**
+         * Loads the given CSS text to the Markdown text.
+         * @param cssText input in CSS format
+         */
+        fun loadCss(cssText: String) {
+            this.cssText?.cancel()
+            this.cssText = this.scope.async { cssText }
+        }
+
+        /**
+         * Loads the CSS text from Android assets.
+         * @param cssPath CSS file path in assets directory. (ex. "basic_theme.css", "sample/classic.css")
+         */
+        fun loadCssFromAssets(cssPath: String) {
+            this.cssText?.cancel()
+            this.cssText = this.scope.async { readFileFromAsset(cssPath) }
+        }
     }
 
     private suspend fun readFileFromAsset(fileName: String): String = try {

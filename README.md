@@ -37,19 +37,25 @@ Add `<MarkdownView/>` to your layout:
 
 and refer it in your Activity/Fragment:
 
-```java
-MarkdownView markdownView = (MarkdownView) findViewById(R.id.markdownView);
+```kotlin
+val markdownView = findViewById<MarkdownView>(R.id.markdownView)
 ```
-**NOTE**:
-You could also create the view by code. Below an example of how to set the whole activity to be a MarkdownView by Adding the following to your onCreate method:
 
-```java
-MarkdownView markdownView = new MarkdownView(this);
-setContentView(markdownView);
+It's also possible to create the view in code. Do like this in your `onCreate` method:
 
-markdownView.loadMarkdown("## Hello Markdown");
-markdownView.loadCssFromAssets("markdown_css_themes/paperwhite.css");
+```kotlin
+val markdownView = MarkdownView(this)
+setContentView(markdownView)
+
+mainScope.launch {
+    markdownView.commit {
+        loadMarkdown("## Hello Markdown")
+        loadCssFromAssets("markdown_css_themes/paperwhite.css")
+    }
+}
 ```
+
+**NOTE**: If you don't want to use Kotlin coroutine, see [1.x version](https://github.com/BoxResin/MarkdownViewSupport/tree/v1.0.0)
 
 For more information, see [Whole XML attributes and methods of MarkdownView](https://github.com/BoxResin/MarkdownViewSupport/wiki/Whole-XML-attributes-and-methods-of-MarkdownView).
 
