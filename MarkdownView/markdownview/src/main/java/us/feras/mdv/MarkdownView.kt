@@ -14,7 +14,7 @@ import java.util.*
  * @author Feras Alnatsheh
  */
 class MarkdownView : WebView {
-    private var markdownText: String = ""
+    private var mdTextInHtml: String = ""
     private var cssText: String = ""
     private val markdownProcessor = MarkdownProcessor()
 
@@ -25,6 +25,10 @@ class MarkdownView : WebView {
         val cssText: String = typedArray.getString(R.styleable.MarkdownView_css) ?: ""
         val cssPath: String = typedArray.getString(R.styleable.MarkdownView_cssFromAssets) ?: ""
         typedArray.recycle()
+
+        if (arrayOf(mdText, mdPath, cssText, cssPath).all { it.isEmpty() }) {
+            return
+        }
 
         GlobalScope.launch {
             commit {
@@ -51,14 +55,12 @@ class MarkdownView : WebView {
 
         // Apply config
         if (config.markdownText != null) {
-            this@MarkdownView.markdownText = config.markdownText!!.await()
+            val markdownText: String = config.markdownText!!.await()
+            // A CPU intensive task
+            this@MarkdownView.mdTextInHtml = withContext(Dispatchers.Default) {
+                markdownProcessor.markdown(markdownText)
+            }
         }
-
-        // A CPU intensive task
-        val mdTextInHtml: String = withContext(Dispatchers.Default) {
-            markdownProcessor.markdown(this@MarkdownView.markdownText)
-        }
-
         if (config.cssText != null) {
             this@MarkdownView.cssText = config.cssText!!.await()
         }
