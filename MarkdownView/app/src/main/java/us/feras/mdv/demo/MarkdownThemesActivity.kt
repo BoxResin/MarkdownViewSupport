@@ -34,7 +34,7 @@ class MarkdownThemesActivity : AppCompatActivity(), OnItemSelectedListener {
         this.scope.cancel()
     }
 
-    override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         val mdv: MarkdownView = findViewById(R.id.markdownView)
         this.scope.launch {
             mdv.commit {
