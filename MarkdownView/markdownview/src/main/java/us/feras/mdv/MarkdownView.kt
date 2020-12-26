@@ -77,7 +77,7 @@ $mdTextInHtml
 </html>"""
 
         withContext(Dispatchers.Main) {
-            loadData(html, "text/html", "UTF-8")
+            loadDataWithBaseURL("fake://", html, "text/html", "UTF-8", null)
         }
     }
 
