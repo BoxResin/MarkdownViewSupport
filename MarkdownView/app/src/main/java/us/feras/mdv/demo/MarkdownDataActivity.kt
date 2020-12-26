@@ -5,9 +5,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import us.feras.mdv.MarkdownView
 
 class MarkdownDataActivity : AppCompatActivity() {
+    private val scope = MainScope()
+
     private lateinit var markdownEditText: EditText
     private lateinit var markdownView: MarkdownView
 
@@ -31,7 +36,14 @@ class MarkdownDataActivity : AppCompatActivity() {
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        this.scope.cancel()
+    }
+
     private fun updateMarkdownView() {
-        this.markdownView.loadMarkdown(this.markdownEditText.text.toString())
+        this.scope.launch {
+            markdownView.loadMarkdown(markdownEditText.text.toString())
+        }
     }
 }
