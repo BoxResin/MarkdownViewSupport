@@ -10,7 +10,8 @@ bintray {
     artifactId = 'MarkdownViewSupport'
     version = '1.0.0'
     repo = 'maven'
-    vcsUrl = "https://github.com/BoxResin/MarkdownViewSupport.git"
+    vcsUrl = 'https://github.com/BoxResin/MarkdownViewSupport.git'
+    license = 'Apache-2.0'
     dryRun = false
     docs = true
     sources = true
