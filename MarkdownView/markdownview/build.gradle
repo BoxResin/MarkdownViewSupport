@@ -8,7 +8,7 @@ bintray {
 
     groupId = 'boxresin.library'
     artifactId = 'MarkdownViewSupport'
-    version = '2.0.0'
+    version = '2.0.1'
     repo = 'maven'
     vcsUrl = 'https://github.com/BoxResin/MarkdownViewSupport.git'
     license = 'Apache-2.0'
